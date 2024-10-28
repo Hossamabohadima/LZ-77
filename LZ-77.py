@@ -21,6 +21,9 @@ def Compression(message):
     return v
 
 
+
+
+
 def Decompression(v):
     message=""
     for i in range(0,len(v)):
