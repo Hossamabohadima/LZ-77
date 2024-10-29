@@ -6,13 +6,13 @@ def Compression(message):
         temp+=message[i]
         if temp not in searchWindow:
             if len(temp)==1:
-                v.append("<"+"0"+","+"0"+","+temp+">")
+                v.append((0,0,temp))
                 searchWindow+=temp
                 temp=""
             else:
                 temp = temp[:-1]
                 index=searchWindow.rfind(temp)
-                v.append("<"+str(len(searchWindow)-index)+","+str(len(temp))+","+message[i]+">")
+                v.append((str(len(searchWindow)-index),str(len(temp)),message[i]))
                 searchWindow+=temp+message[i]
                 temp=""
             if len(searchWindow)>12:
@@ -27,10 +27,9 @@ def Compression(message):
 def Decompression(v):
     message=""
     for i in range(0,len(v)):
-        components = v[i][1:-1].split(',')
-        index = int(components[0])
-        length = int(components[1])
-        newChar= components[2]
+        index = int(v[i][0])
+        length = int(v[i][1])
+        newChar= v[i][2]
         
         if index == 0 and length == 0:
             message+=newChar
